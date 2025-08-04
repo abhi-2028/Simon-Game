@@ -9,6 +9,14 @@ let level = 0;
 
 let h2 = document.querySelector("h2");
 
+document.addEventListener("click", function(){
+    if(started == false){
+        started = true;
+
+        levelup();
+    }
+});
+
 document.addEventListener("keypress", function(){
     if(started == false){
         started = true;
