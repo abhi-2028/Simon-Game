@@ -9,14 +9,18 @@ let level = 0;
 let h2 = document.querySelector("h2");
 let btnContainer = document.querySelector(".btn-container");
 let stBtn = document.querySelector(".st-btn");
+let score = document.querySelector(".highest-sc");
 
+let highestScore = 0;
+let currScore = 0;
 
 document.querySelector(".st-btn").addEventListener("click", function(){
     if(started == false){
         started = true;
+        document.querySelector(".highest-sc").innerText = `Highest Score: ${highestScore}`;
         btnContainer.classList.remove("before-start");
         stBtn.classList.add("before-start");
-        setTimeout(levelup(), 9000);
+        setTimeout(levelup(), 1000);
     }
 });
 
@@ -45,6 +49,7 @@ function userFlash(btn){
 function levelup(){
     userSeq = [];
     level++;
+    currScore = level-1;
     h2.innerText = `Level ${level}`; 
 
     let randIdx = Math.floor(Math.random() * 4);
@@ -86,7 +91,11 @@ for(btn of allBtns){
 }
  
 function reset(){
-    h2.innerHTML = `Game Over! Your score was <b>${level-1}</b> <br>Press any key to start`;
+    h2.innerHTML = `Game Over! Your score was <b>${level-1}</b> <br>Press Restart to Try Again`;
+    if(currScore > highestScore){
+        highestScore = currScore;
+    }
+    score.innerText= `Highest Score: ${highestScore}`;
     stBtn.innerText = "Restart";
     stBtn.classList.remove("before-start");
     btnContainer.classList.add("before-start");
